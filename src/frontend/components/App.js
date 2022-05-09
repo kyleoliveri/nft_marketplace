@@ -1,20 +1,47 @@
 
 import logo from './logo.png';
 import './App.css';
+import Navigation from './Navbar';
+import { useState } from 'react';
+import { ethers } from "ethers";
+import MarketplaceAbi from '../contractsData/Marketplace.json'
+import MarketplaceAddress from '../contractsData/Marketplace-address.json'
+import NFTAbi from '../contractsData/NFT.json'
+import NFTAddress from '../contractsData/NFT-address.json'
  
 function App() {
+
+const [loading, setLoading] = useState(true)
+const [account, setAccount] = useState(null)
+const [marketplace, setMarketplace] = useState({})
+const [nft, setNFT] = useState({})
+
+// MetaMask Login/Connect
+const web3Handler = async () => {
+  const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+  setAccount(accounts[0]);
+
+  // Get provider from MetaMask
+  const provider = new ethers.providers.Web3Provider(window.ethereum);
+
+   // Get signer
+   const signer = provider.getSigner();
+
+   loadContracts(signer);
+}
+
+const loadContracts = async (signer) => {
+  //Get deployed copies of contracts
+  const marketplace = new ethers.Contract(MarketplaceAddress.address, MarketplaceAbi.abi, signer);
+  setMarketplace(marketplace);
+  const nft = new ethers.Contract(NFTAddress.address, NFTAbi.abi, signer)
+  setNFT(nft);
+  setLoading(false);
+}
+
   return (
     <div>
-      <nav className="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
-        <a
-          className="navbar-brand col-sm-3 col-md-2 ms-3"
-          href="#"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          NFT Marketplace
-        </a>
-      </nav>
+      <Navigation web3Handler={web3Handler} account={account} />
       <div className="container-fluid mt-5">
         <div className="row">
           <main role="main" className="col-lg-12 d-flex text-center">

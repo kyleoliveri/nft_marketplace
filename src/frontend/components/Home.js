@@ -1,7 +1,13 @@
-import React from 'react'
+import { useState, useEffect } from 'react'
+import { ethers } from 'ethers'
+import { Row, Col, Card, Button } from 'react-bootstrap'
 
-export default function Home() {
-  return (
-    <div>Home</div>
-  )
+const Home = ({ marketplace, nft }) => {
+    return (
+        <div className='flex justify-center'>
+
+        </div>
+    )
 }
+
+export default Home;

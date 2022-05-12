@@ -67,7 +67,7 @@ function App() {
           </div>
         ) : (
           <Routes>
-            <Route path="/" element={<Home />} />
+            <Route path="/" element={<Home marketplace={marketplace} nft={nft} />} />
             <Route path="/create" element={<Create />} />
             <Route path="my-listed-items" element={<MyListedItems />} />
             <Route path="/my-purchases" element={<MyPurchases />} />

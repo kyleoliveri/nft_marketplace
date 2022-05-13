@@ -51,7 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div>
+      <div className='App'>
         <Navigation web3Handler={web3Handler} account={account} />
         {loading ? (
           <div

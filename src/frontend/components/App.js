@@ -3,7 +3,7 @@ import "./App.css";
 import { useState } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { ethers } from "ethers";
-import { Spinner } from 'react-bootstrap'
+import { Spinner } from "react-bootstrap";
 import Navigation from "./Navbar";
 import Home from "./Home";
 import Create from "./Create";
@@ -51,7 +51,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <div className='App'>
+      <div className="App">
         <Navigation web3Handler={web3Handler} account={account} />
         {loading ? (
           <div
@@ -63,12 +63,18 @@ function App() {
             }}
           >
             <Spinner animation="border" style={{ display: "flex" }} />
-            <p className='mx-3 my-0'>Awaiting MetaMask Connection...</p>
+            <p className="mx-3 my-0">Awaiting MetaMask Connection...</p>
           </div>
         ) : (
           <Routes>
-            <Route path="/" element={<Home marketplace={marketplace} nft={nft} />} />
-            <Route path="/create" element={<Create />} />
+            <Route
+              path="/"
+              element={<Home marketplace={marketplace} nft={nft} />}
+            />
+            <Route
+              path="/create"
+              element={<Create marketplace={marketplace} nft={nft} />}
+            />
             <Route path="my-listed-items" element={<MyListedItems />} />
             <Route path="/my-purchases" element={<MyPurchases />} />
           </Routes>
